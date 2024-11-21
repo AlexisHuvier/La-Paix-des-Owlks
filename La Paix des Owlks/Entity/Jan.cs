@@ -1,0 +1,90 @@
+﻿using La_Paix_des_Owlks.Scene;
+using nkast.Aether.Physics2D.Dynamics;
+using SharpEngine.AetherPhysics;
+using SharpEngine.Core;
+using SharpEngine.Core.Component;
+using SharpEngine.Core.Entity;
+using SharpEngine.Core.Math;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace La_Paix_des_Owlks.Entity
+{
+    internal class Jan: SharpEngine.Core.Entity.Entity
+    {
+        private ControlComponent _controlComponent;
+        private SpriteComponent _spriteComponent;
+
+        public Jan()
+        {
+            Tag = "Jan";
+            AddComponent(new TransformComponent(new Vec2(640, 460), zLayer: 10, scale: new Vec2(0.75f)));
+            _spriteComponent = AddComponent(new SpriteComponent("Jan", true));
+            AddComponent(new PhysicsComponent(BodyType.Dynamic, true, true))
+                .AddRectangleCollision(new Vec2(70, 110), new Vec2(0, 10))
+                .CollisionCallback += OnCollision;
+            _controlComponent = AddComponent(new PhysicsControlComponent(speed: 200));
+        }
+
+        public override void Update(float delta)
+        {
+            base.Update(delta);
+
+            if (_controlComponent.Direction.X > 0 && _spriteComponent.FlipX)
+                _spriteComponent.FlipX = false;
+            else if (_controlComponent.Direction.X < 0 && !_spriteComponent.FlipX)
+                _spriteComponent.FlipX = true;
+        }
+
+        public void OnCollision(object? sender, PhysicsEventArgs args)
+        {
+            var system = Scene?.GetSceneSystem<PhysicsSystem>();
+            if(system == null)
+                return;
+
+            SharpEngine.Core.Entity.Entity? senderEntity;
+            Body? senderBody;
+            if (system.GetEntityForBody(args.Other.Body) == this)
+            {
+                senderEntity = system.GetEntityForBody(args.Sender.Body);
+                senderBody = args.Sender.Body;
+            }
+            else
+            {
+                senderEntity = system.GetEntityForBody(args.Other.Body);
+                senderBody = args.Other.Body;
+            }
+
+            if (senderEntity == null)
+                return;
+
+            if (senderEntity?.Tag == "Rock" || senderEntity?.Tag == "Wood")
+            {
+                system.RemoveBody(senderBody, true);
+                Scene!.RemoveEntity(senderEntity, true);
+
+                switch(senderEntity.Tag)
+                {
+                    case "Rock":
+                        LPDOConsts.Save.Stone += 1;
+                        break;
+                    case "Wood":
+                        LPDOConsts.Save.Wood += 1;
+                        break;
+                }
+
+                if(((Game)Scene).Resource0 == senderEntity)
+                    LPDOConsts.Save.Taken0 = true;
+                else if (((Game)Scene).Resource1 == senderEntity)
+                    LPDOConsts.Save.Taken1 = true;
+                else if (((Game)Scene).Resource2 == senderEntity)
+                    LPDOConsts.Save.Taken2 = true;
+                else if (((Game)Scene).Resource3 == senderEntity)
+                    LPDOConsts.Save.Taken3 = true;
+            }
+        }
+    }
+}
