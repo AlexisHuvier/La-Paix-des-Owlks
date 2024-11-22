@@ -12,7 +12,7 @@ namespace La_Paix_des_Owlks.Entity
 
         public Map()
         {
-            _transformComponent = new TransformComponent(Vec2.Zero, Vec2.One, 0);
+            _transformComponent = new TransformComponent(Vec2.Zero, Vec2.One, 0, zLayer: int.MinValue);
             AddComponent(new SpriteComponent("bg", true, SpriteOffset));
             AddComponent(new SpriteComponent("bg", true, -SpriteOffset));
             AddComponent(new SpriteComponent("bg", true, new Vec2(SpriteOffset.X, -SpriteOffset.Y)));

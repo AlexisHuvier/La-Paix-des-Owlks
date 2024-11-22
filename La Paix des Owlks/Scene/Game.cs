@@ -1,7 +1,10 @@
 ﻿using La_Paix_des_Owlks.Entity;
+using La_Paix_des_Owlks.System;
 using La_Paix_des_Owlks.Widget;
 using Raylib_cs;
 using SharpEngine.AetherPhysics;
+using SharpEngine.Core.Component;
+using SharpEngine.Core.Manager;
 using SharpEngine.Core.Math;
 using SharpEngine.Core.Widget;
 
@@ -21,15 +24,16 @@ namespace La_Paix_des_Owlks.Scene
             AddWidget(new ActionBar());
 
             AddSceneSystem(new PhysicsSystem());
+            AddSceneSystem(new ActionSystem(this));
         }
 
         public override void OpenScene()
         {
-            base.OpenScene();
-
             RemoveAllEntities();
+
+            base.OpenScene();
             AddEntity(new Map()).Load();
-            Jan = AddEntity(new Jan());
+            Jan = AddEntity(new Jan(LPDOConsts.Save.PlayerPosition));
             Jan.Load();
 
             foreach(var object_ in LPDOConsts.Save.Objects)

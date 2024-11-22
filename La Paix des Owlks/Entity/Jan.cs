@@ -17,14 +17,15 @@ namespace La_Paix_des_Owlks.Entity
     {
         private ControlComponent _controlComponent;
         private SpriteComponent _spriteComponent;
+        private TransformComponent _transformComponent;
 
-        public Jan()
+        public Jan(Vec2 position)
         {
             Tag = "Jan";
-            AddComponent(new TransformComponent(new Vec2(640, 460), zLayer: 10, scale: new Vec2(0.75f)));
+            _transformComponent = AddComponent(new TransformComponent(position, scale: new Vec2(0.75f)));
             _spriteComponent = AddComponent(new SpriteComponent("Jan", true));
-            AddComponent(new PhysicsComponent(BodyType.Dynamic, true, true))
-                .AddRectangleCollision(new Vec2(70, 110), new Vec2(0, 10))
+            AddComponent(new PhysicsComponent(BodyType.Dynamic, true, true, true))
+                .AddRectangleCollision(new Vec2(70, 30), new Vec2(0, 35))
                 .CollisionCallback += OnCollision;
             _controlComponent = AddComponent(new PhysicsControlComponent(speed: 200));
         }
@@ -32,6 +33,8 @@ namespace La_Paix_des_Owlks.Entity
         public override void Update(float delta)
         {
             base.Update(delta);
+
+            _transformComponent.ZLayer = Convert.ToInt32(_transformComponent.Position.Y);
 
             if (_controlComponent.Direction.X > 0 && _spriteComponent.FlipX)
                 _spriteComponent.FlipX = false;
