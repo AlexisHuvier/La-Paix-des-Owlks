@@ -76,14 +76,11 @@ namespace La_Paix_des_Owlks.Entity
                         break;
                 }
 
-                if(((Game)Scene).Resource0 == senderEntity)
-                    LPDOConsts.Save.Taken0 = true;
-                else if (((Game)Scene).Resource1 == senderEntity)
-                    LPDOConsts.Save.Taken1 = true;
-                else if (((Game)Scene).Resource2 == senderEntity)
-                    LPDOConsts.Save.Taken2 = true;
-                else if (((Game)Scene).Resource3 == senderEntity)
-                    LPDOConsts.Save.Taken3 = true;
+                LPDOConsts.Save.Objects.RemoveAll( obj => 
+                    obj.X == Convert.ToInt32(senderEntity.GetComponentAs<TransformComponent>()!.Position.X) && 
+                    obj.Y == Convert.ToInt32(senderEntity.GetComponentAs<TransformComponent>()!.Position.Y) && 
+                    obj.Type == senderEntity.Tag
+                );
             }
         }
     }

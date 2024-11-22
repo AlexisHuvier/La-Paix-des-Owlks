@@ -10,10 +10,6 @@ namespace La_Paix_des_Owlks.Scene
     internal class Game: SharpEngine.Core.Scene
     {
         public Jan Jan { get; private set; } = null!;
-        public SharpEngine.Core.Entity.Entity? Resource0 { get; private set; } = null;
-        public SharpEngine.Core.Entity.Entity? Resource1 { get; private set; } = null;
-        public SharpEngine.Core.Entity.Entity? Resource2 { get; private set; } = null;
-        public SharpEngine.Core.Entity.Entity? Resource3 { get; private set; } = null;
 
         public Game()
         {
@@ -36,29 +32,29 @@ namespace La_Paix_des_Owlks.Scene
             Jan = AddEntity(new Jan());
             Jan.Load();
 
-            if (!LPDOConsts.Save.Taken0) {
-                Resource0 = AddEntity(new Rock(new Vec2(300, 300)));
-                Resource0.Load();
-            }
-            if (!LPDOConsts.Save.Taken1)
+            foreach(var object_ in LPDOConsts.Save.Objects)
             {
-                Resource1 = AddEntity(new Rock(new Vec2(900, 600)));
-                Resource1.Load();
-            }
-            if (!LPDOConsts.Save.Taken2)
-            {
-                Resource2 = AddEntity(new Wood(new Vec2(300, 600)));
-                Resource2.Load();
-            }
-            if (!LPDOConsts.Save.Taken3)
-            {
-                Resource3 = AddEntity(new Wood(new Vec2(900, 300)));
-                Resource3.Load();
+                var position = new Vec2(object_.X, object_.Y);
+                SharpEngine.Core.Entity.Entity entity = object_.Type switch {
+                    "Rock" => new Rock(position),
+                    "Wood" => new Wood(position),
+                    "House" => new House(position),
+                    _ => throw new Exception("Unknown object type")
+                };
+                AddEntity(entity).Load();
             }
 
             Window!.CameraManager.FollowEntity = Jan;
             Window.CameraManager.FractionSpeed = 2.5f;
             Window.CameraManager.Mode = SharpEngine.Core.Utils.CameraMode.FollowSmooth;
+        }
+
+        public override void Unload()
+        {
+            base.Unload();
+
+            LPDOConsts.Save.PlayerPosition = Jan.GetComponentAs<TransformComponent>()!.Position;
+            LPDOConsts.Save.Save();
         }
 
         public override void Update(float delta)
