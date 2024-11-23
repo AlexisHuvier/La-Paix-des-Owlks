@@ -1,4 +1,6 @@
-﻿using SharpEngine.Core.Math;
+﻿using La_Paix_des_Owlks.System;
+using La_Paix_des_Owlks.Utils;
+using SharpEngine.Core.Math;
 using SharpEngine.Core.Renderer;
 using SharpEngine.Core.Utils;
 
@@ -10,14 +12,9 @@ namespace La_Paix_des_Owlks.Widget
 
         public ActionBar(int zLayer = 1000) : base(Vec2.Zero, zLayer)
         {
-            AddChild(new ActionBarItem("House", new Vec2(295, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(395, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(495, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(595, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(695, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(795, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(895, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
-            AddChild(new ActionBarItem("House", new Vec2(995, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
+            AddChild(new ActionBarItem("House", new Vec2(290, 800), "Construit une maison\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildHouse;
+           
+            AddChild(new ActionBarItem("Cross", new Vec2(990, 800), "Détruit une construction", new Vec2(250, 30))).Clicked += SwitchErase;
         }
 
         public override void Draw()
@@ -36,8 +33,16 @@ namespace La_Paix_des_Owlks.Widget
             SERender.DrawRectangleLines(new Rect(745, 755, 90, 90), 5, Color.DarkGray, InstructionSource.UI, ZLayer);
             SERender.DrawRectangleLines(new Rect(845, 755, 90, 90), 5, Color.DarkGray, InstructionSource.UI, ZLayer);
             SERender.DrawRectangleLines(new Rect(945, 755, 90, 90), 5, Color.DarkGray, InstructionSource.UI, ZLayer);
-
         }
 
+        public void SwitchBuildHouse(object? sender, EventArgs e)
+        {
+            Scene!.GetSceneSystem<ActionSystem>()!.State = ActionState.BuildHouse;
+        }
+
+        public void SwitchErase(object? sender, EventArgs e)
+        {
+            Scene!.GetSceneSystem<ActionSystem>()!.State = ActionState.Erase;
+        }
     }
 }
