@@ -8,7 +8,7 @@ namespace La_Paix_des_Owlks.Widget
     {
         public ActionBar(int zLayer = 1000) : base(Vec2.Zero, zLayer)
         {
-            AddChild(new ActionBarItem("House", new Vec2(295, 800)));
+            AddChild(new ActionBarItem("House", new Vec2(295, 800), "Cout : 1 bois / 1 pierre", new Vec2(250, 30)));
         }
 
         public override void Draw()
