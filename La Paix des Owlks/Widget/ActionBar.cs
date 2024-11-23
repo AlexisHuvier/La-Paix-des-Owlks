@@ -4,8 +4,13 @@ using SharpEngine.Core.Utils;
 
 namespace La_Paix_des_Owlks.Widget
 {
-    internal class ActionBar(int zLayer = 1000) : SharpEngine.Core.Widget.Widget(Vec2.Zero, zLayer)
+    internal class ActionBar : SharpEngine.Core.Widget.Widget
     {
+        public ActionBar(int zLayer = 1000) : base(Vec2.Zero, zLayer)
+        {
+            AddChild(new ActionBarItem("House", new Vec2(295, 800)));
+        }
+
         public override void Draw()
         {
             base.Draw();
