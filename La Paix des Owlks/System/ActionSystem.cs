@@ -92,6 +92,7 @@ namespace La_Paix_des_Owlks.System
             {
                 _game.AddEntity(new House(mousePosition)).Load();
                 LPDOConsts.Save.Objects.Add(new Object { Type = "House", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
+                State = ActionState.None;
             }
 
         }
