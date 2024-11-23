@@ -23,8 +23,9 @@ window.TextureManager.AddTexture("Jan", "Resource/Image/Jan.png");
 
 window.TextureManager.AddTexture("Rock", "Resource/Image/Rock.png");
 window.TextureManager.AddTexture("Wood", "Resource/Image/Wood.png");
-
 window.TextureManager.AddTexture("House", "Resource/Image/Maison.png");
+window.TextureManager.AddTexture("Cross", "Resource/Image/Cross.png");
+window.TextureManager.AddTexture("Eraser", "Resource/Image/Eraser.png");
 #endregion
 
 #region Load Scenes and Launch

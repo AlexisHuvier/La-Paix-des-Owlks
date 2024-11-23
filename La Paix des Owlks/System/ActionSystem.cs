@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 using La_Paix_des_Owlks.Scene;
 using SharpEngine.Core.Component;
 using SharpEngine.AetherPhysics;
+using SharpEngine.Core.Entity;
 
 namespace La_Paix_des_Owlks.System
 {
     internal class ActionSystem : ISceneSystem
     {
-
         public ActionState State {
             get => _state;
             set
@@ -27,18 +27,22 @@ namespace La_Paix_des_Owlks.System
                 {
                     case ActionState.BuildHouse:
                         _ghostHouse.Displayed = true;
+                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                     case ActionState.Erase:
                         _ghostHouse.Displayed = false;
+                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = true;
                         break;
                     case ActionState.None:
                         _ghostHouse.Displayed = false;
+                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                 }
             }
         }
 
         private readonly GhostHouse _ghostHouse;
+        private readonly Eraser _eraser;
         private ActionState _state;
         private readonly Game _game;
 
@@ -46,12 +50,15 @@ namespace La_Paix_des_Owlks.System
         {
             _game = game;
             _ghostHouse = new GhostHouse(Vec2.Zero);
+            _eraser = new Eraser();
+
             State = ActionState.None;
         }
 
         public void OpenScene()
         {
             _game.AddEntity(_ghostHouse).Load();
+            _game.AddEntity(_eraser).Load();
         }
 
         public void CloseScene()
@@ -99,6 +106,13 @@ namespace La_Paix_des_Owlks.System
 
         private void UpdateErase(float delta)
         {
+            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - new Vec2(640, 460));
+            _eraser.GetComponentAs<TransformComponent>()!.Position = mousePosition;
+
+            if (InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
+            {
+                State = ActionState.None;
+            }
         }
     }
 }

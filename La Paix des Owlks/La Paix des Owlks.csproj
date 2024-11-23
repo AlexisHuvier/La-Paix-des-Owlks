@@ -21,6 +21,12 @@
     <None Update="Resource\Image\BG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resource\Image\Cross.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resource\Image\Eraser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resource\Image\Jan.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
