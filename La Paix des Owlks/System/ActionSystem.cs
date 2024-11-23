@@ -97,8 +97,14 @@ namespace La_Paix_des_Owlks.System
 
             if (_ghostHouse.CanBuild() && InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
             {
-                _game.AddEntity(new House(mousePosition)).Load();
-                LPDOConsts.Save.Objects.Add(new Object { Type = "House", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
+                if (LPDOConsts.Save.Wood >= 1 && LPDOConsts.Save.Stone >= 1)
+                {
+                    LPDOConsts.Save.Wood -= 1;
+                    LPDOConsts.Save.Stone -= 1;
+                    _game.AddEntity(new House(mousePosition)).Load();
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "House", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
+                }
+
                 State = ActionState.None;
             }
 
