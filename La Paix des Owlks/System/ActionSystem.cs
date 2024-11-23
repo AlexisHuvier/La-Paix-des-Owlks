@@ -76,17 +76,6 @@ namespace La_Paix_des_Owlks.System
                     UpdateErase(delta);
                     break;
             }
-
-            if (InputManager.IsKeyPressed(SharpEngine.Core.Input.Key.B))
-            {
-                DebugManager.Log(LogLevel.LogInfo, "ACTION: Build house");
-                State = ActionState.BuildHouse;
-            }
-            if (InputManager.IsKeyPressed(SharpEngine.Core.Input.Key.E))
-            {
-                DebugManager.Log(LogLevel.LogInfo, "ACTION: Erase");
-                State = ActionState.Erase;
-            }
         }
 
         public void Draw()
