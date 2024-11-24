@@ -64,12 +64,7 @@ namespace La_Paix_des_Owlks.Entity
                     var width = texture.Width * transform.Scale.X;
                     var height = texture.Height * transform.Scale.Y;
                     var otherRect = new Rect(transform.Position.X - width / 2, transform.Position.Y - height / 2, width, height);
-                    if (
-                        rect.X <= otherRect.X + otherRect.Width &&
-                        rect.X + rect.Width >= otherRect.X &&
-                        rect.Y <= otherRect.Y + otherRect.Height &&
-                        rect.Y + rect.Height >= otherRect.Y
-                    )
+                    if(rect.Intersect(otherRect))
                         return false;
                 }
             }

@@ -126,8 +126,9 @@ namespace La_Paix_des_Owlks.System
                         obj.Type == erasedEntity.Tag
                     );
 
-                    if(erasedEntity.GetComponentAs<PhysicsComponent>() is { } physics && physics.Body != null)
-                        _game.GetSceneSystem<PhysicsSystem>()!.RemoveBody(physics.Body, true);
+                    var system = _game.GetSceneSystem<PhysicsSystem>()!;
+                    if (system.GetBodyForEntity(erasedEntity) is { } body)
+                        system.RemoveBody(body, true);
                     _game.RemoveEntity(erasedEntity, true);
                 }
                 State = ActionState.None;
