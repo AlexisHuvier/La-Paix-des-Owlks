@@ -23,6 +23,10 @@ namespace La_Paix_des_Owlks.System
             set
             {
                 _state = value;
+                if (erasedEntity != null)
+                    erasedEntity.GetComponentAs<SpriteComponent>()!.TintColor = Color.White;
+                erasedEntity = null;
+
                 switch (value)
                 {
                     case ActionState.BuildHouse:
@@ -45,6 +49,7 @@ namespace La_Paix_des_Owlks.System
         private readonly Eraser _eraser;
         private ActionState _state;
         private readonly Game _game;
+        private SharpEngine.Core.Entity.Entity? erasedEntity = null;
 
         public ActionSystem(Game game)
         {
@@ -115,9 +120,14 @@ namespace La_Paix_des_Owlks.System
             var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - LPDOConsts.HalfRenderSize);
             _eraser.GetComponentAs<TransformComponent>()!.Position = mousePosition;
 
+            if(erasedEntity != null)
+                erasedEntity.GetComponentAs<SpriteComponent>()!.TintColor = Color.White;
+            erasedEntity = _eraser.GetErasedEntity();
+            if (erasedEntity != null)
+                erasedEntity.GetComponentAs<SpriteComponent>()!.TintColor = Color.Red;
+
             if (InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
             {
-                var erasedEntity = _eraser.GetErasedEntity();
                 if(erasedEntity != null)
                 {
                     LPDOConsts.Save.Objects.RemoveAll(obj =>
