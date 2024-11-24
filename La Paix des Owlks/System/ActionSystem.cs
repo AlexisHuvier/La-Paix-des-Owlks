@@ -92,7 +92,7 @@ namespace La_Paix_des_Owlks.System
 
         private void UpdateBuildHouse(float delta)
         {
-            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - new Vec2(640, 460));
+            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - LPDOConsts.HalfRenderSize);
             _ghostHouse.TransformComponent.Position = mousePosition;
 
             if (_ghostHouse.CanBuild() && InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
@@ -112,7 +112,7 @@ namespace La_Paix_des_Owlks.System
 
         private void UpdateErase(float delta)
         {
-            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - new Vec2(640, 460));
+            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - LPDOConsts.HalfRenderSize);
             _eraser.GetComponentAs<TransformComponent>()!.Position = mousePosition;
 
             if (InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))

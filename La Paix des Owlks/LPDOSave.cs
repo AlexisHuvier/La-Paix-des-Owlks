@@ -19,7 +19,7 @@ namespace La_Paix_des_Owlks
 
         public int Peace { get; set; } = 0;
 
-        public Vec2 PlayerPosition { get; set; } = new Vec2(640, 460);
+        public Vec2 PlayerPosition { get; set; } = LPDOConsts.HalfRenderSize;
 
         public List<Object> Objects { get; set; } = [
             new Object() { Type = "Rock", X = 300, Y = 300 },

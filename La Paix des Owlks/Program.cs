@@ -1,4 +1,5 @@
 ﻿using ImGuiNET;
+using La_Paix_des_Owlks;
 using La_Paix_des_Owlks.Debug;
 using La_Paix_des_Owlks.Entity;
 using La_Paix_des_Owlks.Scene;
@@ -8,7 +9,16 @@ using SharpEngine.Core.Manager;
 
 Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
 
-var window = new Window(1280, 920, "La Paix des Owlks", SharpEngine.Core.Utils.Color.CornflowerBlue, null, true, true, true);
+var window = new Window(
+    (int)LPDOConsts.RenderSize.X, 
+    (int)LPDOConsts.RenderSize.Y, 
+    "La Paix des Owlks", 
+    SharpEngine.Core.Utils.Color.CornflowerBlue, 
+    null, 
+    true, 
+    true, 
+    true
+);
 
 
 
