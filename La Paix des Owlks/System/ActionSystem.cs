@@ -117,6 +117,19 @@ namespace La_Paix_des_Owlks.System
 
             if (InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
             {
+                var erasedEntity = _eraser.GetErasedEntity();
+                if(erasedEntity != null)
+                {
+                    LPDOConsts.Save.Objects.RemoveAll(obj =>
+                        obj.X == Convert.ToInt32(erasedEntity.GetComponentAs<TransformComponent>()!.Position.X) &&
+                        obj.Y == Convert.ToInt32(erasedEntity.GetComponentAs<TransformComponent>()!.Position.Y) &&
+                        obj.Type == erasedEntity.Tag
+                    );
+
+                    if(erasedEntity.GetComponentAs<PhysicsComponent>() is { } physics && physics.Body != null)
+                        _game.GetSceneSystem<PhysicsSystem>()!.RemoveBody(physics.Body, true);
+                    _game.RemoveEntity(erasedEntity, true);
+                }
                 State = ActionState.None;
             }
         }
