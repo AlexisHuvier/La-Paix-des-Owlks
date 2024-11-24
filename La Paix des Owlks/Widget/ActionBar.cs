@@ -14,7 +14,7 @@ namespace La_Paix_des_Owlks.Widget
         {
             AddChild(new ActionBarItem("House", new Vec2(290, 800), "Construit une maison\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildHouse;
            
-            AddChild(new ActionBarItem("Cross", new Vec2(990, 800), "Détruit une construction", new Vec2(250, 30))).Clicked += SwitchErase;
+            AddChild(new ActionBarItem("Cross", new Vec2(990, 800), "Détruit une construction", new Vec2(270, 30))).Clicked += SwitchErase;
         }
 
         public override void Draw()
