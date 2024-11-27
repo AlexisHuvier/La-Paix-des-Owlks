@@ -21,6 +21,7 @@ namespace La_Paix_des_Owlks.Scene
             AddWidget(new Label(new Vec2(100, 80), "Nourriture : 0", "RAYLIB_DEFAULT", fontSize: 20));
             AddWidget(new Label(new Vec2(100, 110), "Paix : 0", "RAYLIB_DEFAULT", fontSize: 20));
 
+            AddWidget(new TopHud());
             AddWidget(new ActionBar());
 
             AddSceneSystem(new PhysicsSystem());

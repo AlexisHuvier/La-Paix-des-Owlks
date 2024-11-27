@@ -18,6 +18,7 @@ namespace La_Paix_des_Owlks
         public int Food { get; set; } = 0;
 
         public int Peace { get; set; } = 0;
+        public float ValueAgainstIris { get; set; } = 50;
 
         public Vec2 PlayerPosition { get; set; } = LPDOConsts.HalfRenderSize;
 
@@ -44,6 +45,7 @@ namespace La_Paix_des_Owlks
             Stone = save.GetObjectAs("stone", 0);
             Food = save.GetObjectAs("food", 0);
             Peace = save.GetObjectAs("peace", 0);
+            ValueAgainstIris = save.GetObjectAs("valueAgainstIris", 50);
             Objects = save.GetObjectAs("objects", Objects);
             PlayerPosition = save.GetObjectAs("playerPosition", PlayerPosition);
         }
@@ -56,6 +58,7 @@ namespace La_Paix_des_Owlks
             save.SetObject("stone", Stone);
             save.SetObject("food", Food);
             save.SetObject("peace", Peace);
+            save.SetObject("valueAgainstIris", ValueAgainstIris);
             save.SetObject("objects", Objects);
             save.SetObject("playerPosition", PlayerPosition);
             save.Write("save.lpdo");
