@@ -13,6 +13,10 @@ namespace La_Paix_des_Owlks.Scene
     internal class Game: SharpEngine.Core.Scene
     {
         public Jan Jan { get; private set; } = null!;
+        public float IrisPointTime = 1;
+        public float IrisPoint = 1;
+
+        private float _time = 0;
 
         public Game()
         {
@@ -53,6 +57,18 @@ namespace La_Paix_des_Owlks.Scene
         {
             base.Update(delta);
 
+            _time += delta;
+            if (_time >= IrisPointTime)
+            {
+                _time = 0;
+                LPDOConsts.Save.ValueAgainstIris -= IrisPoint;
+                if(LPDOConsts.Save.ValueAgainstIris <= 0)
+                {
+                    DebugManager.Log(SharpEngine.Core.Utils.LogLevel.LogInfo, "GAME: Game Over");
+                }
+            }
+
+        }
 
         public override void Unload()
         {
