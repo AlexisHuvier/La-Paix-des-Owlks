@@ -62,10 +62,8 @@ namespace La_Paix_des_Owlks.Scene
             {
                 _time = 0;
                 LPDOConsts.Save.ValueAgainstIris -= IrisPoint;
-                if(LPDOConsts.Save.ValueAgainstIris <= 0)
-                {
-                    DebugManager.Log(SharpEngine.Core.Utils.LogLevel.LogInfo, "GAME: Game Over");
-                }
+                if(LPDOConsts.Save.ValueAgainstIris <= 0 || LPDOConsts.Save.ValueAgainstIris >= 100)
+                    Window!.IndexCurrentScene = Scenes.EndGame.Id();
             }
 
         }

@@ -10,7 +10,8 @@ namespace La_Paix_des_Owlks.Scene
     {
         MainMenu,
         Credits,
-        Game
+        Game,
+        EndGame
     }
 
     public static class SceneExtensions

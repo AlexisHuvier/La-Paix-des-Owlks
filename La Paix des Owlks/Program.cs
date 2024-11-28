@@ -42,6 +42,7 @@ window.TextureManager.AddTexture("JanEmote", "Resource/Image/JanEmote.png");
 window.AddScene(new MainMenu());
 window.AddScene(new Credits());
 window.AddScene(new Game());
+window.AddScene(new EndGame());
 
 window.IndexCurrentScene = Scenes.MainMenu.Id();
 window.Run();

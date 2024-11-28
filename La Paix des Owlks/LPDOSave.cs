@@ -40,14 +40,20 @@ namespace La_Paix_des_Owlks
         public void Load()
         {
             var save = new JsonSave();
-            save.Read("save.lpdo");
+            if(File.Exists("save.lpdo"))
+                save.Read("save.lpdo");
             Wood = save.GetObjectAs("wood", 0);
             Stone = save.GetObjectAs("stone", 0);
             Food = save.GetObjectAs("food", 0);
             Peace = save.GetObjectAs("peace", 0);
             ValueAgainstIris = save.GetObjectAs("valueAgainstIris", 50);
-            Objects = save.GetObjectAs("objects", Objects);
-            PlayerPosition = save.GetObjectAs("playerPosition", PlayerPosition);
+            Objects = save.GetObjectAs<List<Object>>("objects", [
+                new Object() { Type = "Rock", X = 300, Y = 300 },
+                new Object() { Type = "Rock", X = 900, Y = 600 },
+                new Object() { Type = "Wood", X = 300, Y = 600 },
+                new Object() { Type = "Wood", X = 900, Y = 300 }
+            ]);
+            PlayerPosition = save.GetObjectAs("playerPosition", LPDOConsts.HalfRenderSize);
         }
 
         public void Save()
