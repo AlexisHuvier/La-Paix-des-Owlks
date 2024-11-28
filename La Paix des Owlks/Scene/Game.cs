@@ -14,7 +14,7 @@ namespace La_Paix_des_Owlks.Scene
     {
         public Jan Jan { get; private set; } = null!;
         public float IrisPointTime = 1;
-        public float IrisPoint = 1;
+        public float IrisPoint = 0.5f;
 
         private float _time = 0;
 
