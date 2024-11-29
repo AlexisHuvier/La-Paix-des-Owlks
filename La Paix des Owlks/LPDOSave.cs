@@ -46,7 +46,7 @@ namespace La_Paix_des_Owlks
             Stone = save.GetObjectAs("stone", 0);
             Food = save.GetObjectAs("food", 0);
             Peace = save.GetObjectAs("peace", 0);
-            ValueAgainstIris = save.GetObjectAs("valueAgainstIris", 50);
+            ValueAgainstIris = save.GetObjectAs<float>("valueAgainstIris", 50);
             Objects = save.GetObjectAs<List<Object>>("objects", [
                 new Object() { Type = "Rock", X = 300, Y = 300 },
                 new Object() { Type = "Rock", X = 900, Y = 600 },
