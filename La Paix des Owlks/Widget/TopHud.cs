@@ -15,24 +15,66 @@ namespace La_Paix_des_Owlks.Widget
     internal class TopHud : SharpEngine.Core.Widget.Widget
     {
         private Vec2 _barSize = new(600, 50);
-        private Vec2 _barPos = new(LPDOConsts.HalfRenderSize.X, 100);
-        private Texture2D _irisTexture;
-        private Vec2 _irisPos = new(1000, 100);
-        private Vec2 _irisSize = new(100);
-        private Texture2D _janTexture;
-        private Vec2 _janPos = new(275, 100);
-        private Vec2 _janSize = new(100);
+        private Vec2 _barPos = new(LPDOConsts.HalfRenderSize.X, 75);
+
+        class Image
+        {
+            public Texture2D? Texture;
+            public Vec2 Pos;
+            public Vec2 Size;
+            public Vec2 FinalSize;
+        }
+
+        private Image[] _images = [
+            new Image() { Texture = null, Pos = new Vec2(1000, 75), Size = new Vec2(100), FinalSize = new Vec2(100) },
+            new Image() { Texture = null, Pos = new Vec2(275, 75), Size = new Vec2(100), FinalSize = new Vec2(100) },
+            new Image() { Texture = null, Pos = new Vec2(350, 125), Size = new Vec2(100), FinalSize = new Vec2(48) },
+            new Image() { Texture = null, Pos = new Vec2(500, 125), Size = new Vec2(100), FinalSize = new Vec2(48) },
+            new Image() { Texture = null, Pos = new Vec2(650, 125), Size = new Vec2(100), FinalSize = new Vec2(48) },
+            new Image() { Texture = null, Pos = new Vec2(800, 125), Size = new Vec2(100), FinalSize = new Vec2(48) }
+        ];
 
         public TopHud() : base(Vec2.Zero, 1000)
-        {}
+        {
+            AddChild(new Label(new Vec2(425, 125), "0", "RAYLIB_DEFAULT", fontSize: 30));
+            AddChild(new Label(new Vec2(575, 125), "0", "RAYLIB_DEFAULT", fontSize: 30));
+            AddChild(new Label(new Vec2(725, 125), "0", "RAYLIB_DEFAULT", fontSize: 30));
+            AddChild(new Label(new Vec2(875, 125), "0", "RAYLIB_DEFAULT", fontSize: 30));
+        }
 
         public override void Load()
         {
             base.Load();
-            _irisTexture = Scene!.Window!.TextureManager.GetTexture("Iris");
-            _irisSize = new Vec2(_irisTexture.Width, _irisTexture.Height);
-            _janTexture = Scene!.Window!.TextureManager.GetTexture("JanEmote");
-            _janSize = new Vec2(_janTexture.Width, _janTexture.Height);
+            
+            var nbImages = 0;
+
+            foreach (var texture in new string[] { "Iris", "JanEmote" })
+            {
+                _images[nbImages].Texture = Scene!.Window!.TextureManager.GetTexture(texture);
+                _images[nbImages].Size = new Vec2(_images[nbImages].Texture!.Value.Width, _images[nbImages].Texture!.Value.Height);
+                _images[nbImages].FinalSize = _images[nbImages].Size;
+
+                nbImages++;
+            }
+
+            foreach (var texture in new string[] { "Wood", "Rock", "Food", "Peace" })
+            {
+                _images[nbImages].Texture = Scene!.Window!.TextureManager.GetTexture(texture);
+                _images[nbImages].Size = new Vec2(_images[nbImages].Texture!.Value.Width, _images[nbImages].Texture!.Value.Height);
+
+                nbImages++;
+            }
+        }
+
+        public override void Update(float delta)
+        {
+            base.Update(delta);
+
+            var labels = GetChildrenAs<Label>();
+            labels[0].Text = LPDOConsts.Save.Wood.ToString();
+            labels[1].Text = LPDOConsts.Save.Stone.ToString();
+            labels[2].Text = LPDOConsts.Save.Food.ToString();
+            labels[3].Text = LPDOConsts.Save.Peace.ToString();
         }
 
         public override void Draw()
@@ -45,8 +87,9 @@ namespace La_Paix_des_Owlks.Widget
             SERender.DrawRectangle(new Rect(_barPos, _barSize), _barSize / 2f, 0f, SharpEngine.Core.Utils.Color.Black, InstructionSource.UI, ZLayer);
             SERender.DrawRectangle(new Rect(_barPos, _barSize - 4f), (_barSize - 4f) / 2f, 0f, SharpEngine.Core.Utils.Color.Red, InstructionSource.UI, ZLayer + 0.0001f);
             SERender.DrawRectangle(new Rect(_barPos, (_barSize.X - 4f) * LPDOConsts.Save.ValueAgainstIris / 100f, _barSize.Y - 4f), (_barSize - 4f) / 2f, 0f, SharpEngine.Core.Utils.Color.Green, InstructionSource.UI, ZLayer + 0.0002f);
-            SERender.DrawTexture(_janTexture, new Rect(Vec2.Zero, _janSize), new Rect(_janPos, _janSize), _janSize / 2f, 0, SharpEngine.Core.Utils.Color.White, InstructionSource.UI, ZLayer + 0.0003f);
-            SERender.DrawTexture(_irisTexture, new Rect(Vec2.Zero, _irisSize), new Rect(_irisPos, _irisSize), _irisSize / 2f, 0, SharpEngine.Core.Utils.Color.White, InstructionSource.UI, ZLayer + 0.0003f);
+            foreach(var image in _images)
+                SERender.DrawTexture(image.Texture!.Value, new Rect(Vec2.Zero, image.Size), new Rect(image.Pos, image.FinalSize), image.FinalSize / 2f, 0, SharpEngine.Core.Utils.Color.White, InstructionSource.UI, ZLayer + 0.0003f);
+
         }
     }
 }

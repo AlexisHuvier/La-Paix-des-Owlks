@@ -36,6 +36,8 @@ window.TextureManager.AddTexture("Cross", "Resource/Image/Cross.png");
 window.TextureManager.AddTexture("Eraser", "Resource/Image/Eraser.png");
 window.TextureManager.AddTexture("Iris", "Resource/Image/Iris.png");
 window.TextureManager.AddTexture("JanEmote", "Resource/Image/JanEmote.png");
+window.TextureManager.AddTexture("Food", "Resource/Image/Food.png");
+window.TextureManager.AddTexture("Peace", "Resource/Image/Peace.png");
 #endregion
 
 #region Load Scenes and Launch
