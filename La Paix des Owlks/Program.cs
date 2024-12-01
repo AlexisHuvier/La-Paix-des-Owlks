@@ -38,6 +38,7 @@ window.TextureManager.AddTexture("Iris", "Resource/Image/Iris.png");
 window.TextureManager.AddTexture("JanEmote", "Resource/Image/JanEmote.png");
 window.TextureManager.AddTexture("Food", "Resource/Image/Food.png");
 window.TextureManager.AddTexture("Peace", "Resource/Image/Peace.png");
+window.TextureManager.AddTexture("Farm", "Resource/Image/Farm.png");
 #endregion
 
 #region Load Scenes and Launch

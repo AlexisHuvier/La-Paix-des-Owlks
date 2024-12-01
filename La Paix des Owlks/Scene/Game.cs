@@ -38,6 +38,7 @@ namespace La_Paix_des_Owlks.Scene
                     "Rock" => new Rock(position),
                     "Wood" => new Wood(position),
                     "House" => new House(position),
+                    "Farm" => new Farm(position),
                     _ => throw new Exception("Unknown object type")
                 };
                 AddEntity(entity);

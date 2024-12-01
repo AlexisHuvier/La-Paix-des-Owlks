@@ -56,6 +56,10 @@ namespace La_Paix_des_Owlks.Debug
                     entity = new Rock(new SharpEngine.Core.Math.Vec2(x, y));
                     LPDOConsts.Save.Objects.Add(new Object { Type = "Rock", X = x, Y = y });
                     break;
+                case "farm":
+                    entity = new Farm(new SharpEngine.Core.Math.Vec2(x, y));
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Farm", X = x, Y = y });
+                    break;
                 default:
                     console.AddText("Invalid object");
                     return;

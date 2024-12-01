@@ -9,6 +9,7 @@ namespace La_Paix_des_Owlks.Utils
     internal enum ActionState
     {
         BuildHouse,
+        BuildFarm,
         Erase,
         None
     }
