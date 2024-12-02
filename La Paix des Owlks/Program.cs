@@ -39,6 +39,8 @@ window.TextureManager.AddTexture("JanEmote", "Resource/Image/JanEmote.png");
 window.TextureManager.AddTexture("Food", "Resource/Image/Food.png");
 window.TextureManager.AddTexture("Peace", "Resource/Image/Peace.png");
 window.TextureManager.AddTexture("Farm", "Resource/Image/Farm.png");
+window.TextureManager.AddTexture("Sawmill", "Resource/Image/Sawmill.png");
+window.TextureManager.AddTexture("Mine", "Resource/Image/Mine.png");
 #endregion
 
 #region Load Scenes and Launch

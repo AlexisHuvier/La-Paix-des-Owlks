@@ -60,6 +60,14 @@ namespace La_Paix_des_Owlks.Debug
                     entity = new Farm(new SharpEngine.Core.Math.Vec2(x, y));
                     LPDOConsts.Save.Objects.Add(new Object { Type = "Farm", X = x, Y = y });
                     break;
+                case "sawmill":
+                    entity = new Sawmill(new SharpEngine.Core.Math.Vec2(x, y));
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Sawmill", X = x, Y = y });
+                    break;
+                case "mine":
+                    entity = new Mine(new SharpEngine.Core.Math.Vec2(x, y));
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Mine", X = x, Y = y });
+                    break;
                 default:
                     console.AddText("Invalid object");
                     return;

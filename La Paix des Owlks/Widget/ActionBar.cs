@@ -14,6 +14,8 @@ namespace La_Paix_des_Owlks.Widget
         {
             AddChild(new ActionBarItem("House", new Vec2(290, 800), "Construit une maison\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildHouse;
             AddChild(new ActionBarItem("Farm", new Vec2(390, 800), "Construit une ferme\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildFarm;
+            AddChild(new ActionBarItem("Sawmill", new Vec2(490, 800), "Construit une scierie\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildSawmill;
+            AddChild(new ActionBarItem("Mine", new Vec2(590, 800), "Construit une mine\n\nCout : 1 bois / 1 pierre", new Vec2(250, 60))).Clicked += SwitchBuildMine;
             AddChild(new ActionBarItem("Cross", new Vec2(990, 800), "Détruit une construction", new Vec2(270, 30))).Clicked += SwitchErase;
         }
 
@@ -43,6 +45,16 @@ namespace La_Paix_des_Owlks.Widget
         public void SwitchBuildFarm(object? sender, EventArgs e)
         {
             Scene!.GetSceneSystem<ActionSystem>()!.State = ActionState.BuildFarm;
+        }
+
+        public void SwitchBuildSawmill(object? sender, EventArgs e)
+        {
+            Scene!.GetSceneSystem<ActionSystem>()!.State = ActionState.BuildSawmill;
+        }
+
+        public void SwitchBuildMine(object? sender, EventArgs e)
+        {
+            Scene!.GetSceneSystem<ActionSystem>()!.State = ActionState.BuildMine;
         }
 
         public void SwitchErase(object? sender, EventArgs e)

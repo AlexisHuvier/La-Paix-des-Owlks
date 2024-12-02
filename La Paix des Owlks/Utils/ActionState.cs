@@ -10,6 +10,8 @@ namespace La_Paix_des_Owlks.Utils
     {
         BuildHouse,
         BuildFarm,
+        BuildSawmill,
+        BuildMine,
         Erase,
         None
     }

@@ -10,19 +10,19 @@ using SharpEngine.Core.Utils;
 
 namespace La_Paix_des_Owlks.Entity
 {
-    internal class GhostMine : SharpEngine.Core.Entity.Entity
+    internal class GhostFarm : SharpEngine.Core.Entity.Entity
     {
         public TransformComponent TransformComponent { get; set; }
         public bool Displayed { get; set; } = false;
 
         private Color whiteTransparent = new(255, 255, 255, 128);
         private Color redTransparent = new(255, 0, 0, 128);
-        private readonly string[] CantBuildTags = ["Mine", "Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
+        private readonly string[] CantBuildTags = ["Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
 
-        public GhostMine(Vec2 position)
+        public GhostFarm(Vec2 position)
         {
             Tag = "Ghost";
-            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue, scale: new Vec2(1.5f)));
+            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue, scale: new Vec2(1.25f)));
         }
 
         public override void Draw()
@@ -33,7 +33,7 @@ namespace La_Paix_des_Owlks.Entity
                 return;
 
             var position = TransformComponent.Position;
-            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Farm");
+            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Mine");
             SERender.DrawTexture(
                 finalTexture,
                 new Rect(0f, 0f, finalTexture.Width, finalTexture.Height),
@@ -48,7 +48,7 @@ namespace La_Paix_des_Owlks.Entity
 
         public bool CanBuild()
         {
-            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Farm");
+            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Mine");
             var rect = new Rect(
                 TransformComponent.Position.X - finalTexture.Width / 2 * TransformComponent.Scale.X, 
                 TransformComponent.Position.Y - finalTexture.Height / 2 * TransformComponent.Scale.Y,
