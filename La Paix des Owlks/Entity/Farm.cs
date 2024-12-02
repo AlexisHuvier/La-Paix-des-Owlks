@@ -26,7 +26,7 @@ namespace La_Paix_des_Owlks.Entity
             _transformComponent.ZLayer = Convert.ToInt32(_transformComponent.Position.Y);
             _timer += delta;
 
-            if(_timer >= 2)
+            if(_timer >= 4)
             {
                 _timer = 0;
                 LPDOConsts.Save.Food += 1;
