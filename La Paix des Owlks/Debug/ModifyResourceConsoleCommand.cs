@@ -45,6 +45,10 @@ namespace La_Paix_des_Owlks.Debug
                     LPDOConsts.Save.Peace = value;
                     console.AddText($"Peace: {LPDOConsts.Save.Peace}");
                     break;
+                case "jan":
+                    LPDOConsts.Save.ValueAgainstIris = value;
+                    console.AddText($"Jan: {LPDOConsts.Save.ValueAgainstIris}");
+                    break;
                 default:
                     console.AddText("Invalid resource");
                     break;
