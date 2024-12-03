@@ -10,7 +10,7 @@ using SharpEngine.Core.Utils;
 
 namespace La_Paix_des_Owlks.Entity
 {
-    internal class GhostHouse : SharpEngine.Core.Entity.Entity
+    internal class GhostStatue : SharpEngine.Core.Entity.Entity
     {
         public TransformComponent TransformComponent { get; set; }
         public bool Displayed { get; set; } = false;
@@ -19,10 +19,10 @@ namespace La_Paix_des_Owlks.Entity
         private Color redTransparent = new(255, 0, 0, 128);
         private readonly string[] CantBuildTags = ["Statue", "Mine", "Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
 
-        public GhostHouse(Vec2 position)
+        public GhostStatue(Vec2 position)
         {
             Tag = "Ghost";
-            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue, scale: new Vec2(1.5f)));
+            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue));
         }
 
         public override void Draw()
@@ -33,7 +33,7 @@ namespace La_Paix_des_Owlks.Entity
                 return;
 
             var position = TransformComponent.Position;
-            var finalTexture = Scene!.Window!.TextureManager.GetTexture("House");
+            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Statue");
             SERender.DrawTexture(
                 finalTexture,
                 new Rect(0f, 0f, finalTexture.Width, finalTexture.Height),
@@ -48,7 +48,7 @@ namespace La_Paix_des_Owlks.Entity
 
         public bool CanBuild()
         {
-            var finalTexture = Scene!.Window!.TextureManager.GetTexture("House");
+            var finalTexture = Scene!.Window!.TextureManager.GetTexture("Statue");
             var rect = new Rect(
                 TransformComponent.Position.X - finalTexture.Width / 2 * TransformComponent.Scale.X, 
                 TransformComponent.Position.Y - finalTexture.Height / 2 * TransformComponent.Scale.Y,

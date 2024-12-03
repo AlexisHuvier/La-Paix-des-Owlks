@@ -27,49 +27,34 @@ namespace La_Paix_des_Owlks.System
                     erasedEntity.GetComponentAs<SpriteComponent>()!.TintColor = Color.White;
                 erasedEntity = null;
 
+                _ghostHouse.Displayed = false;
+                _ghostFarm.Displayed = false;
+                _ghostSawmill.Displayed = false;
+                _ghostMine.Displayed = false;
+                _ghostStatue.Displayed = false;
+                _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
+
                 switch (value)
                 {
                     case ActionState.BuildHouse:
                         _ghostHouse.Displayed = true;
-                        _ghostFarm.Displayed = false;
-                        _ghostSawmill.Displayed = false;
-                        _ghostMine.Displayed = false;
-                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                     case ActionState.BuildFarm:
-                        _ghostHouse.Displayed = false;
                         _ghostFarm.Displayed = true;
-                        _ghostSawmill.Displayed = false;
-                        _ghostMine.Displayed = false;
-                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                     case ActionState.BuildSawmill:
-                        _ghostHouse.Displayed = false;
-                        _ghostFarm.Displayed = false;
                         _ghostSawmill.Displayed = true;
-                        _ghostMine.Displayed = false;
-                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                     case ActionState.BuildMine:
-                        _ghostHouse.Displayed = false;
-                        _ghostFarm.Displayed = false;
-                        _ghostSawmill.Displayed = false;
                         _ghostMine.Displayed = true;
-                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
+                        break;
+                    case ActionState.BuildStatue:
+                        _ghostStatue.Displayed = true;
                         break;
                     case ActionState.Erase:
-                        _ghostHouse.Displayed = false;
-                        _ghostFarm.Displayed = false;
-                        _ghostSawmill.Displayed = false;
-                        _ghostMine.Displayed = false;
                         _eraser.GetComponentAs<SpriteComponent>()!.Displayed = true;
                         break;
                     case ActionState.None:
-                        _ghostHouse.Displayed = false;
-                        _ghostFarm.Displayed = false;
-                        _ghostSawmill.Displayed = false;
-                        _ghostMine.Displayed = false;
-                        _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
                         break;
                 }
             }
@@ -79,6 +64,7 @@ namespace La_Paix_des_Owlks.System
         private readonly GhostSawmill _ghostSawmill;
         private readonly GhostFarm _ghostFarm;
         private readonly GhostMine _ghostMine;
+        private readonly GhostStatue _ghostStatue;
         private readonly Eraser _eraser;
         private ActionState _state;
         private readonly Game _game;
@@ -91,6 +77,7 @@ namespace La_Paix_des_Owlks.System
             _ghostFarm = new GhostFarm(Vec2.Zero);
             _ghostSawmill = new GhostSawmill(Vec2.Zero);
             _ghostMine = new GhostMine(Vec2.Zero);
+            _ghostStatue = new GhostStatue(Vec2.Zero);
             _eraser = new Eraser();
 
             State = ActionState.None;
@@ -102,6 +89,7 @@ namespace La_Paix_des_Owlks.System
             _game.AddEntity(_ghostFarm).Load();
             _game.AddEntity(_ghostSawmill).Load();
             _game.AddEntity(_ghostMine).Load();
+            _game.AddEntity(_ghostStatue).Load();
             _game.AddEntity(_eraser).Load();
         }
 
@@ -131,6 +119,9 @@ namespace La_Paix_des_Owlks.System
                     break;
                 case ActionState.BuildMine:
                     UpdateBuildMine(delta);
+                    break;
+                case ActionState.BuildStatue:
+                    UpdateBuildStatue(delta);
                     break;
                 case ActionState.Erase:
                     UpdateErase(delta);
@@ -221,7 +212,25 @@ namespace La_Paix_des_Owlks.System
 
                 State = ActionState.None;
             }
+        }
 
+        private void UpdateBuildStatue(float delta)
+        {
+            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - LPDOConsts.HalfRenderSize);
+            _ghostStatue.TransformComponent.Position = mousePosition;
+
+            if (_ghostStatue.CanBuild() && InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
+            {
+                if (LPDOConsts.Save.Stone >= 2)
+                {
+                    LPDOConsts.Save.Stone -= 2;
+                    LPDOConsts.Save.Peace += 10;
+                    _game.AddEntity(new Statue(mousePosition)).Load();
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Statue", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
+                }
+
+                State = ActionState.None;
+            }
         }
 
         private void UpdateErase(float delta)
@@ -249,6 +258,9 @@ namespace La_Paix_des_Owlks.System
                     if (system.GetBodyForEntity(erasedEntity) is { } body)
                         system.RemoveBody(body, true);
                     _game.RemoveEntity(erasedEntity, true);
+
+                    if(erasedEntity.Tag == "Statue")
+                        LPDOConsts.Save.Peace -= 5;
                 }
                 State = ActionState.None;
             }

@@ -12,6 +12,7 @@ namespace La_Paix_des_Owlks.Utils
         BuildFarm,
         BuildSawmill,
         BuildMine,
+        BuildStatue,
         Erase,
         None
     }

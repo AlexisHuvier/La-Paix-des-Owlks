@@ -68,6 +68,10 @@ namespace La_Paix_des_Owlks.Debug
                     entity = new Mine(new SharpEngine.Core.Math.Vec2(x, y));
                     LPDOConsts.Save.Objects.Add(new Object { Type = "Mine", X = x, Y = y });
                     break;
+                case "statue":
+                    entity = new Statue(new SharpEngine.Core.Math.Vec2(x, y));
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Statue", X = x, Y = y });
+                    break;
                 default:
                     console.AddText("Invalid object");
                     return;
