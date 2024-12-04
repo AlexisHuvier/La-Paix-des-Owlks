@@ -42,6 +42,7 @@ window.TextureManager.AddTexture("Farm", "Resource/Image/Farm.png");
 window.TextureManager.AddTexture("Sawmill", "Resource/Image/Sawmill.png");
 window.TextureManager.AddTexture("Mine", "Resource/Image/Mine.png");
 window.TextureManager.AddTexture("Statue", "Resource/Image/Statue.png");
+window.TextureManager.AddTexture("Temple", "Resource/Image/Temple.png");
 #endregion
 
 #region Load Scenes and Launch

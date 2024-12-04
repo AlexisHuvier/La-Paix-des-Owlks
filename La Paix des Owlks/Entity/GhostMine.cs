@@ -17,7 +17,7 @@ namespace La_Paix_des_Owlks.Entity
 
         private Color whiteTransparent = new(255, 255, 255, 128);
         private Color redTransparent = new(255, 0, 0, 128);
-        private readonly string[] CantBuildTags = ["Mine", "Statue", "Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
+        private readonly string[] CantBuildTags = ["Temple", "Mine", "Statue", "Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
 
         public GhostFarm(Vec2 position)
         {

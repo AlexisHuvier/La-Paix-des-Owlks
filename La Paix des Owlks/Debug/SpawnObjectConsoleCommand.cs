@@ -72,6 +72,10 @@ namespace La_Paix_des_Owlks.Debug
                     entity = new Statue(new SharpEngine.Core.Math.Vec2(x, y));
                     LPDOConsts.Save.Objects.Add(new Object { Type = "Statue", X = x, Y = y });
                     break;
+                case "temple":
+                    entity = new Temple(new SharpEngine.Core.Math.Vec2(x, y));
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Temple", X = x, Y = y });
+                    break;
                 default:
                     console.AddText("Invalid object");
                     return;

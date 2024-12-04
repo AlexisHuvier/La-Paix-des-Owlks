@@ -32,6 +32,7 @@ namespace La_Paix_des_Owlks.System
                 _ghostSawmill.Displayed = false;
                 _ghostMine.Displayed = false;
                 _ghostStatue.Displayed = false;
+                _ghostTemple.Displayed = false;
                 _eraser.GetComponentAs<SpriteComponent>()!.Displayed = false;
 
                 switch (value)
@@ -51,6 +52,9 @@ namespace La_Paix_des_Owlks.System
                     case ActionState.BuildStatue:
                         _ghostStatue.Displayed = true;
                         break;
+                    case ActionState.BuildTemple:
+                        _ghostTemple.Displayed = true;
+                        break;
                     case ActionState.Erase:
                         _eraser.GetComponentAs<SpriteComponent>()!.Displayed = true;
                         break;
@@ -64,6 +68,7 @@ namespace La_Paix_des_Owlks.System
         private readonly GhostSawmill _ghostSawmill;
         private readonly GhostFarm _ghostFarm;
         private readonly GhostMine _ghostMine;
+        private readonly GhostTemple _ghostTemple;
         private readonly GhostStatue _ghostStatue;
         private readonly Eraser _eraser;
         private ActionState _state;
@@ -78,6 +83,7 @@ namespace La_Paix_des_Owlks.System
             _ghostSawmill = new GhostSawmill(Vec2.Zero);
             _ghostMine = new GhostMine(Vec2.Zero);
             _ghostStatue = new GhostStatue(Vec2.Zero);
+            _ghostTemple = new GhostTemple(Vec2.Zero);
             _eraser = new Eraser();
 
             State = ActionState.None;
@@ -90,6 +96,7 @@ namespace La_Paix_des_Owlks.System
             _game.AddEntity(_ghostSawmill).Load();
             _game.AddEntity(_ghostMine).Load();
             _game.AddEntity(_ghostStatue).Load();
+            _game.AddEntity(_ghostTemple).Load();
             _game.AddEntity(_eraser).Load();
         }
 
@@ -122,6 +129,9 @@ namespace La_Paix_des_Owlks.System
                     break;
                 case ActionState.BuildStatue:
                     UpdateBuildStatue(delta);
+                    break;
+                case ActionState.BuildTemple:
+                    UpdateBuildTemple(delta);
                     break;
                 case ActionState.Erase:
                     UpdateErase(delta);
@@ -227,6 +237,25 @@ namespace La_Paix_des_Owlks.System
                     LPDOConsts.Save.Peace += 10;
                     _game.AddEntity(new Statue(mousePosition)).Load();
                     LPDOConsts.Save.Objects.Add(new Object { Type = "Statue", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
+                }
+
+                State = ActionState.None;
+            }
+        }
+
+        private void UpdateBuildTemple(float delta)
+        {
+            var mousePosition = InputManager.GetMousePosition() + (_game.Window!.CameraManager.Position - LPDOConsts.HalfRenderSize);
+            _ghostTemple.TransformComponent.Position = mousePosition;
+
+            if (_ghostTemple.CanBuild() && InputManager.IsMouseButtonPressed(SharpEngine.Core.Input.MouseButton.Left))
+            {
+                if (LPDOConsts.Save.Stone >= 2 && LPDOConsts.Save.Wood >= 2)
+                {
+                    LPDOConsts.Save.Stone -= 2;
+                    LPDOConsts.Save.Wood -= 2;
+                    _game.AddEntity(new Temple(mousePosition)).Load();
+                    LPDOConsts.Save.Objects.Add(new Object { Type = "Temple", X = Convert.ToInt32(mousePosition.X), Y = Convert.ToInt32(mousePosition.Y) });
                 }
 
                 State = ActionState.None;

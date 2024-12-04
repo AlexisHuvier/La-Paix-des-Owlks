@@ -13,6 +13,7 @@ namespace La_Paix_des_Owlks.Utils
         BuildSawmill,
         BuildMine,
         BuildStatue,
+        BuildTemple,
         Erase,
         None
     }

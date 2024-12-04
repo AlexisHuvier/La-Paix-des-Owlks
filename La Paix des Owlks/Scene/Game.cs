@@ -42,6 +42,7 @@ namespace La_Paix_des_Owlks.Scene
                     "Sawmill" => new Sawmill(position),
                     "Mine" => new Mine(position),
                     "Statue" => new Statue(position),
+                    "Temple" => new Temple(position),
                     _ => throw new Exception("Unknown object type")
                 };
                 AddEntity(entity);
