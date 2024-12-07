@@ -11,7 +11,7 @@ namespace La_Paix_des_Owlks.Entity
 {
     internal class Eraser: SharpEngine.Core.Entity.Entity
     {
-        private readonly string[] CanBeErasedTags = ["House", "Farm", "Sawmill", "Mine", "Statue", "Temple"];
+        private readonly string[] CanBeErasedTags = ["House", "Farm", "Sawmill", "Mine", "Statue", "Temple", "Lance"];
 
         public Eraser()
         {

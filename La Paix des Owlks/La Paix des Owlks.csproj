@@ -42,6 +42,9 @@
     <None Update="Resource\Image\JanEmote.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resource\Image\Lance.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resource\Image\Maison.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

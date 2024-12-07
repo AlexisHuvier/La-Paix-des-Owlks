@@ -14,6 +14,7 @@ namespace La_Paix_des_Owlks.Utils
         BuildMine,
         BuildStatue,
         BuildTemple,
+        BuildLance,
         Erase,
         None
     }
