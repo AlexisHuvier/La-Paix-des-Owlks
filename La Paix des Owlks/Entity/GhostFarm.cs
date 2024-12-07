@@ -10,7 +10,7 @@ using SharpEngine.Core.Utils;
 
 namespace La_Paix_des_Owlks.Entity
 {
-    internal class GhostMine : SharpEngine.Core.Entity.Entity
+    internal class GhostFarm : SharpEngine.Core.Entity.Entity
     {
         public TransformComponent TransformComponent { get; set; }
         public bool Displayed { get; set; } = false;
@@ -19,10 +19,10 @@ namespace La_Paix_des_Owlks.Entity
         private Color redTransparent = new(255, 0, 0, 128);
         private readonly string[] CantBuildTags = ["Lance", "Temple", "Mine", "Statue", "Sawmill", "Farm", "House", "Rock", "Wood", "Jan"];
 
-        public GhostMine(Vec2 position)
+        public GhostFarm(Vec2 position)
         {
             Tag = "Ghost";
-            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue, scale: new Vec2(1.5f)));
+            TransformComponent = AddComponent(new TransformComponent(position, zLayer: int.MaxValue, scale: new Vec2(1.25f)));
         }
 
         public override void Draw()
