@@ -44,6 +44,7 @@ window.TextureManager.AddTexture("Mine", "Resource/Image/Mine.png");
 window.TextureManager.AddTexture("Statue", "Resource/Image/Statue.png");
 window.TextureManager.AddTexture("Temple", "Resource/Image/Temple.png");
 window.TextureManager.AddTexture("Lance", "Resource/Image/Lance.png");
+window.TextureManager.AddTexture("Missile", "Resource/Image/Missile.png");
 #endregion
 
 #region Load Scenes and Launch

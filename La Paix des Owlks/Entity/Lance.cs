@@ -28,6 +28,11 @@ namespace La_Paix_des_Owlks.Entity
             if (_timer >= 4)
             {
                 _timer = 0;
+                if (LPDOConsts.Save.Peace > 0)
+                {
+                    LPDOConsts.Save.Peace -= 1;
+                    Scene!.AddEntity(new Missile(_transformComponent.Position), true);
+                }
             }
             _timer += delta;
         }
