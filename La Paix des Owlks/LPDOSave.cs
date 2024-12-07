@@ -26,7 +26,15 @@ namespace La_Paix_des_Owlks
             new Object() { Type = "Rock", X = 300, Y = 300 },
             new Object() { Type = "Rock", X = 900, Y = 600 },
             new Object() { Type = "Wood", X = 300, Y = 600 },
-            new Object() { Type = "Wood", X = 900, Y = 300 }
+            new Object() { Type = "Wood", X = 900, Y = 300 },
+            new Object() { Type = "Rock", X = 600, Y = 600 },
+            new Object() { Type = "Rock", X = 900, Y = 900 },
+            new Object() { Type = "Wood", X = 700, Y = 600 },
+            new Object() { Type = "Wood", X = 900, Y = 800 },
+            new Object() { Type = "Rock", X = 1250, Y = 300 },
+            new Object() { Type = "Rock", X = 900, Y = 200 },
+            new Object() { Type = "Wood", X = 300, Y = 500 },
+            new Object() { Type = "Wood", X = 1000, Y = 300 }
         ];
 
         public LPDOSave()
@@ -51,7 +59,15 @@ namespace La_Paix_des_Owlks
                 new Object() { Type = "Rock", X = 300, Y = 300 },
                 new Object() { Type = "Rock", X = 900, Y = 600 },
                 new Object() { Type = "Wood", X = 300, Y = 600 },
-                new Object() { Type = "Wood", X = 900, Y = 300 }
+                new Object() { Type = "Wood", X = 900, Y = 300 },
+                new Object() { Type = "Rock", X = 600, Y = 600 },
+                new Object() { Type = "Rock", X = 900, Y = 900 },
+                new Object() { Type = "Wood", X = 700, Y = 600 },
+                new Object() { Type = "Wood", X = 900, Y = 800 },
+                new Object() { Type = "Rock", X = 1250, Y = 300 },
+                new Object() { Type = "Rock", X = 900, Y = 200 },
+                new Object() { Type = "Wood", X = 300, Y = 500 },
+                new Object() { Type = "Wood", X = 1000, Y = 300 }
             ]);
             PlayerPosition = save.GetObjectAs("playerPosition", LPDOConsts.HalfRenderSize);
         }
